@@ -1,0 +1,41 @@
+﻿<Window x:Class="AllCountries.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AllCountries"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="1000">
+    <Grid Background="Gold">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1.5*"/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <DataGrid x:Name="dbGrid1" Margin="10,0,0,200" Height="150" Width="400"></DataGrid>
+        <DataGrid x:Name="dbGrid2" Grid.Row="1" Margin="10,170,0,0" Height="200" Width="400" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Code" Binding="{Binding Code}" />
+                <DataGridTextColumn Header="Omschrijving" Binding="{Binding Omschrijving}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTemplateColumn Header="Vlag" Width="Auto" IsReadOnly="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding ByteArray}" Width="40" Height="40"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <ListBox Grid.Column="1" DisplayMemberPath="omschrijving" x:Name="dbListbox" Margin="32,45,28,32" ScrollViewer.VerticalScrollBarVisibility="Visible"/>
+        <ComboBox Grid.Column="2" DisplayMemberPath="omschrijving" x:Name="dbCombobox" Margin="40,45,39,369" Height="20" Width="150" SelectionChanged="dbCombobox_SelectionChanged"></ComboBox>
+        <Image x:Name="imgFlag" Grid.Column="2" Width="150" Height="150"></Image>
+    </Grid>
+</Window>
